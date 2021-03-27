@@ -24,7 +24,21 @@ const getCreator = (state = [], action) => {
     }
 }
 
+const searchSettings = (state = { sortBy: 'score', filterBy: '', filterValue: '' }, action) => {
+    switch (action.type) {
+        case 'SET_SORT_BY':
+            return { ...state, sortBy: action.value };
+        case 'SET_FILTER_BY':
+            return { ...state, filterBy: action.value };
+        case 'SET_FILTER_VALUE':
+            return { ...state, filterValue: action.value };
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     stories: bestStories,
-    creators: getCreator
+    creators: getCreator,
+    search: searchSettings
 });

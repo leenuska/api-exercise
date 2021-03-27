@@ -28,6 +28,7 @@ const CreatorContainer = (props) => {
 
     return (
         <React.Fragment>
+            <div className='creatorInfo'>
             <h1>{id}</h1>
             <p>
                 Created: {getHumanReadableTime(created)}
@@ -38,6 +39,7 @@ const CreatorContainer = (props) => {
             <p>
                 Submitted interactions: {submitted.length}
             </p>
+            </div>
             <Link to={'../'}>Get back to stories</Link>
         </React.Fragment>
         );
