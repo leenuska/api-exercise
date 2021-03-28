@@ -24,14 +24,32 @@ const getCreator = (state = [], action) => {
     }
 }
 
-const searchSettings = (state = { sortBy: 'score', filterBy: '', filterValue: '' }, action) => {
+const searchInitState = {
+    sortBy: 'score',
+    minDate: 0, // milliseconds
+    maxDate: 0, // milliseconds
+    minScore: 0,
+    maxScore: 0,
+    title: '',
+    creator: ''
+}
+
+const searchSettings = (state = searchInitState, action) => {
     switch (action.type) {
         case 'SET_SORT_BY':
             return { ...state, sortBy: action.value };
-        case 'SET_FILTER_BY':
-            return { ...state, filterBy: action.value };
-        case 'SET_FILTER_VALUE':
-            return { ...state, filterValue: action.value };
+        case 'SET_MIN_DATE':
+            return { ...state, minDate: action.value };
+        case 'SET_MAX_DATE':
+            return { ...state, maxDate: action.value };
+        case 'SET_MIN_SCORE':
+            return { ...state, minScore: action.value };
+        case 'SET_MAX_SCORE':
+            return { ...state, maxScore: action.value };
+        case 'SET_TITLE':
+            return { ...state, title: action.value };
+        case 'SET_CREATOR':
+            return { ...state, creator: action.value };
         default:
             return state;
     }
