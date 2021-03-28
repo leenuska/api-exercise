@@ -24,12 +24,32 @@ export const setSortBy = (value) => ({
     value
 });
 
-export const setFilterBy = (value) => ({
-    type: 'SET_FILTER_BY',
+export const setMinDate = (value) => ({
+    type: 'SET_MIN_DATE',
     value
 });
 
-export const setFilterValue = (value) => ({
-    type: 'SET_FILTER_VALUE',
+export const setMaxDate = (value) => ({
+    type: 'SET_MAX_DATE',
+    value
+});
+
+export const setMinScore = (value) => ({
+    type: 'SET_MIN_SCORE',
+    value
+});
+
+export const setMaxScore = (value) => ({
+    type: 'SET_MAX_SCORE',
+    value
+});
+
+export const setTitle = (value) => ({
+    type: 'SET_TITLE',
+    value
+});
+
+export const setCreator = (value) => ({
+    type: 'SET_CREATOR',
     value
 });

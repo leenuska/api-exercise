@@ -3,64 +3,37 @@ import { connect } from 'react-redux';
 import { fetchStories  } from './redux/actions';
 import PrintStory from './PrintStory';
 import Search from './Search';
+import { sortStories, filterByDate, filterByScore, filterByTitle, filterByName } from './searchUtils';
 
 class StoriesContainer extends React.Component {
 
     constructor(props) {
         super(props);
         this.props.fetchStories();
-
-        this.filterStories = this.filterStories.bind(this);
-        this.sortStories = this.sortStories.bind(this);
-    }
-
-    filterStories(story, filterBy, filterValue) {
-        if (filterBy === '' || filterValue === '' || filterValue === null || filterValue === undefined) {
-            return true;
-        }
-        switch (filterBy) {
-            case 'score':
-                return story.score > filterValue;
-            case 'date':
-                return story.time > filterValue;
-            case 'creator':
-                return story.by === filterValue;
-            default: // title
-                const storyTitle = story.title;
-                const searchTerm = filterValue;
-                const found = storyTitle.toLowerCase().indexOf(searchTerm.toLowerCase());
-                //console.log('search ' + searchTerm + ' from ' + storyTitle + ' -> found?' + found);
-                return found >= 0
-        }
-}
-
-    sortStories(a,b, sortBy) {
-        switch (sortBy) {
-            case 'score':
-                return b.score - a.score; // biggest score first
-            case 'date':
-                return b.time - a.time; // newest first
-            default:
-                const nameA = a.by.toUpperCase(); // ignore case
-                const nameB = b.by.toUpperCase();
-                if (nameA < nameB) {
-                    return -1;
-                }
-                if (nameA > nameB) {
-                    return 1;
-                }
-                return 0; // names are equal
-        }
     }
 
     render() {
 
-        if (!this.props.stories) {
+        const { stories, sortBy, minDate, maxDate, minScore, maxScore, title, creator } = this.props;
+
+        if (!stories) {
             return null;
         }
 
-        const filteredStories = this.props.stories.filter( (story) => this.filterStories(story, this.props.filterBy, this.props.filterValue));
-        const sortedStories = filteredStories.sort((a,b) => this.sortStories(a, b, this.props.sortBy) );
+        let filteredStories = [...stories];
+        if (minDate || maxDate) {
+            filteredStories = filteredStories.filter( (story) => filterByDate(story, minDate, maxDate));
+        }
+        if (minScore || maxScore) {
+            filteredStories = filteredStories.filter( (story) => filterByScore(story, minScore, maxScore));
+        }
+        if (title) {
+            filteredStories = filteredStories.filter( (story) => filterByTitle(story, title));
+        }
+        if (creator) {
+            filteredStories = filteredStories.filter( (story) => filterByName(story, creator));
+        }
+        const sortedStories = filteredStories.sort((a,b) => sortStories(a, b, sortBy) );
 
         return (
             <React.Fragment>
@@ -81,8 +54,12 @@ class StoriesContainer extends React.Component {
 const mapStateToProps = state => ({
     stories: state.stories,
     sortBy: state.search.sortBy,
-    filterBy: state.search.filterBy,
-    filterValue: state.search.filterValue
+    minDate: state.search.minDate,
+    maxDate: state.search.maxDate,
+    minScore: state.search.minScore,
+    maxScore: state.search.maxScore,
+    title: state.search.title,
+    creator: state.search.creator
 });
 
 export default connect(mapStateToProps, { fetchStories })(StoriesContainer)

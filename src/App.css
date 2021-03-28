@@ -54,6 +54,8 @@ button, input, select {
 
 label {
   margin-right: 1em;
+  display: inline-block;
+  width: 5em;
 }
 
 button.searchToggle {
