@@ -25,11 +25,10 @@ li .info {
 
 li span {
   margin-right: 0.5em;
-
 }
 
 li .story{
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
 a {
@@ -49,10 +48,11 @@ a:hover {
 
 button, input, select {
   padding: 0.55em;
-  margin-left: 1em;
+  margin-top: 0.5em;
+  margin-right: 1em;
 }
 
-#filterType {
+label {
   margin-right: 1em;
 }
 
@@ -62,4 +62,8 @@ button.searchToggle {
 
 button.selected {
   border: solid black 2px;
+}
+
+hr {
+  margin-top: 1em;
 }

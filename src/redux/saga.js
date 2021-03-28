@@ -2,7 +2,6 @@ import {
     takeLatest,
     takeEvery,
 } from 'redux-saga/effects';
-
 import { fetchStories, fetchCreatorById } from './fetchApis';
 
 function *rootSaga() {

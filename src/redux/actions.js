@@ -29,7 +29,6 @@ export const setFilterBy = (value) => ({
     value
 });
 
-
 export const setFilterValue = (value) => ({
     type: 'SET_FILTER_VALUE',
     value

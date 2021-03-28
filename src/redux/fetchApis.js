@@ -23,8 +23,9 @@ export function *fetchStories() {
 
         yield put(actions.fetchStoriesSucceeded(only20));
     } catch (e) {
-        // error: dispatch failure action
-        //yield put(actions.fetchStoriesFailed(e.message));
+        // console.log('error when fetching stories!')
+        // TODO dispatch failure action to inform the user, it would be something like this
+        // yield put(actions.fetchStoriesFailed(e.message));
     }
 }
 
@@ -35,7 +36,8 @@ export function *fetchCreatorById(action) {
         //console.log('res.data', res.data);
         yield put(actions.fetchCreatorByIdSucceeded(res.data));
     } catch (e) {
-        // error: dispatch failure action
+        // console.log('error when fetching user information!')
+        // TODO dispatch failure action to inform the user, it would be something like this
         //yield put(actions.fetchCreatorByIdFailed(e.message));
     }
 }

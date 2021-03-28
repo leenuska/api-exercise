@@ -29,26 +29,25 @@ const CreatorContainer = (props) => {
     return (
         <React.Fragment>
             <div className='creatorInfo'>
-            <h1>{id}</h1>
-            <p>
-                Created: {getHumanReadableTime(created)}
-            </p>
-            <p>
-                Karma score: {karma}
-            </p>
-            <p>
-                Submitted interactions: {submitted.length}
-            </p>
+                <h1>{id}</h1>
+                <p>
+                    Created: {getHumanReadableTime(created)}
+                </p>
+                <p>
+                    Karma score: {karma}
+                </p>
+                <p>
+                    Submitted interactions: {submitted.length}
+                </p>
             </div>
             <Link to={'../'}>Get back to stories</Link>
         </React.Fragment>
-        );
+    );
 }
 
 const mapStateToProps = state => ({
     creators: state.creators
 });
-
 
 const mapDispatchToProps = dispatch => ({
     fetchCreatorById: (id) => {
@@ -62,4 +61,3 @@ const enhance = compose(
 );
 
 export default enhance(CreatorContainer);
-

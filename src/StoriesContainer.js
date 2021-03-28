@@ -14,11 +14,6 @@ class StoriesContainer extends React.Component {
         this.sortStories = this.sortStories.bind(this);
     }
 
-    componentDidMount() {
-        //this.props.fetchStories();
-        console.log('component Did mount')
-    }
-
     filterStories(story, filterBy, filterValue) {
         if (filterBy === '' || filterValue === '' || filterValue === null || filterValue === undefined) {
             return true;
@@ -79,7 +74,7 @@ class StoriesContainer extends React.Component {
                     })}
                 </ul>
             </React.Fragment>
-            );
+        );
     }
 }
 

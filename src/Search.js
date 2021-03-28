@@ -1,31 +1,27 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-
 import {setSortBy, setFilterBy, setFilterValue } from './redux/actions';
 
 const Search = (props) => {
 
     const [advancedSearch, setAdvancedSearch] = useState(false);
-    /*
-            minimum or maximum score, or even by selecting a user name in a list, or typing for keywords in the title
-     */
-
-    //const { setSortBy, handleFilterCallback, sortBy, filterBy, filterValue } = props;
+    const { setSortBy, sortBy, setFilterBy, filterBy, setFilterValue, filterValue } = props;
 
     if (advancedSearch) { // advanced search open
         return (
             <React.Fragment>
                 <p><button onClick={() => setAdvancedSearch(false)} className='searchToggle'>Hide search bar</button></p>
-                <p>Stories are sorted by:
-                    <button onClick={() => props.setSortBy('score')} className={props.sortBy === 'score' ? 'selected' : ''}>score</button>
-                    <button onClick={() => props.setSortBy('date')} className={props.sortBy === 'date' ? 'selected' : ''}>date</button>
-                    <button onClick={() => props.setSortBy('creator')} className={props.sortBy === 'creator' ? 'selected' : ''}>creator</button>
+                <p>Can't find the story? Try sorting or searching.</p>
+                <p>Stories are sorted by:<br />
+                    <button onClick={() => setSortBy('score')} className={sortBy === 'score' ? 'selected' : ''}>score</button>
+                    <button onClick={() => setSortBy('date')} className={sortBy === 'date' ? 'selected' : ''}>date</button>
+                    <button onClick={() => setSortBy('creator')} className={sortBy === 'creator' ? 'selected' : ''}>creator</button>
                 </p>
                 <p>
-                    You can search the stories either by score, creator or title.
+                    You can search the stories either by minimum score, creator name or words in the title.
                 </p>
                     <label htmlFor='filterType'>Filter by</label>
-                    <select name='filter' id='filterType' onChange={(e) => props.setFilterBy(e.target.value)} value={props.filterBy}>
+                    <select name='filter' id='filterType' onChange={(e) => setFilterBy(e.target.value)} value={filterBy}>
                         <option value=''></option>
                         <option value='score'>score</option>
                         <option value='creator'>creator</option>
@@ -33,7 +29,7 @@ const Search = (props) => {
                     </select>
 
                     <label htmlFor='filtervalue'>value</label>
-                    <input type='text' id='filtervalue' onChange={(e) => props.setFilterValue(e.target.value)} value={props.filterValue}/>
+                    <input type='text' id='filtervalue' onChange={(e) => setFilterValue(e.target.value)} value={filterValue}/>
 
                 <hr />
             </React.Fragment>
@@ -68,4 +64,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search)
-
