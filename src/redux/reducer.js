@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const bestStories = (state = [], action) => {
+const bestStories = (state = null, action) => {
     switch (action.type) {
         case 'FETCH_STORIES_SUCCEEDED':
             return action.response;

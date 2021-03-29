@@ -17,7 +17,7 @@ class StoriesContainer extends React.Component {
         const { stories, sortBy, minDate, maxDate, minScore, maxScore, title, creator } = this.props;
 
         if (!stories) {
-            return null;
+            return <div>Fetching stories...</div>;
         }
 
         let filteredStories = [...stories];
