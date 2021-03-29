@@ -7,6 +7,6 @@ test('renders learn react link', () => {
   render(<Provider store={store}>
     <App />
   </Provider>);
-  const headingElement = screen.getByText(/Read the most popular stories/i);
+  const headingElement = screen.getByText(/Fetching stories/i);
   expect(headingElement).toBeInTheDocument();
 });

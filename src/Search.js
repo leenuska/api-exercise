@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 import {
     setSortBy,
     setMinDate,
@@ -20,10 +20,12 @@ const Search = (props) => {
         stories,
         setSortBy,
         sortBy,
+        /*
         minDate,
         setMinDate,
         maxDate,
         setMaxDate,
+        */
         minScore,
         setMinScore,
         maxScore,
@@ -47,13 +49,18 @@ const Search = (props) => {
                 <p>
                     Search the stories by:
                 </p>
+                { /*
+                Unfortunately I encountered some bugs related to date fields while developing.
+                It is not possible to reset date fields in every browser, once selected.
+                When pressing delete in date field will cause the app to crash.
+                I also noticed that if you set same day to both fields, you sometimes get results for two days (e.g. 26.3.2021). Might have something to do with time zones.
 
                 <label htmlFor='mindate'>Min date</label>
                 <input type='date' id='mindate' onChange={(e) => setMinDate(e.target.value)} value={format(new Date(minDate), 'yyyy-MM-dd')}/><br />
 
                 <label htmlFor='maxdate'>Max date</label>
                 <input type='date' id='maxdate' onChange={(e) => setMaxDate(e.target.value)} value={format(new Date(maxDate), 'yyyy-MM-dd')}/><br />
-
+                */ }
                 <label htmlFor='minscore'>Min score</label>
                 <input type='number' min='0' id='minscore' onChange={(e) => setMinScore(e.target.value)} value={minScore}/><br />
 
