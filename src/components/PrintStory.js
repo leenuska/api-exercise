@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getHumanReadableTime } from './dateUtils'
+import { getHumanReadableTime } from '../utils/dateUtils'
 
 const PrintStory = (props) => {
 

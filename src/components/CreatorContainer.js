@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { fetchCreatorById } from './redux/actions';
-import withRouteObject from './hoc/withRouteObject';
-import { getHumanReadableTime } from './dateUtils'
+import { fetchCreatorById } from '../redux/actions';
+import withRouteObject from '../hoc/withRouteObject';
+import { getHumanReadableTime } from '../utils/dateUtils'
 
 const CreatorContainer = (props) => {
 

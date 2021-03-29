@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchStories  } from './redux/actions';
+import { fetchStories  } from '../redux/actions';
 import PrintStory from './PrintStory';
-import Search from './Search';
-import { sortStories, filterByDate, filterByScore, filterByTitle, filterByName } from './searchUtils';
+import SearchContainer from './SearchContainer';
+import { sortStories, filterByDate, filterByScore, filterByTitle, filterByName } from '../utils/searchUtils';
 
 class StoriesContainer extends React.Component {
 
@@ -38,7 +38,7 @@ class StoriesContainer extends React.Component {
         return (
             <React.Fragment>
                 <h1>Read the most popular stories</h1>
-                <Search />
+                <SearchContainer />
                 <ul>
                     { sortedStories.map((s, i) => {
                         return (

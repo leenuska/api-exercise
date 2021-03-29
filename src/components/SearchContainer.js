@@ -9,10 +9,10 @@ import {
     setMaxScore,
     setTitle,
     setCreator
-} from './redux/actions';
-import { getNames } from './searchUtils';
+} from '../redux/actions';
+import { getNames } from '../utils/searchUtils';
 
-const Search = (props) => {
+const SearchContainer = (props) => {
 
     const [advancedSearch, setAdvancedSearch] = useState(false);
 
@@ -126,4 +126,4 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)

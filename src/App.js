@@ -5,8 +5,8 @@ import {
   Route
 } from 'react-router-dom';
 import './App.css';
-import StoriesContainer from './StoriesContainer';
-import CreatorContainer from './CreatorContainer';
+import StoriesContainer from './components/StoriesContainer';
+import CreatorContainer from './components/CreatorContainer';
 
 function App() {
 
