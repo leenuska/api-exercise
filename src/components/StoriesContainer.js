@@ -7,8 +7,7 @@ import { sortStories, filterByDate, filterByScore, filterByTitle, filterByName }
 
 class StoriesContainer extends React.Component {
 
-    constructor(props) {
-        super(props);
+    componentDidMount() {
         this.props.fetchStories();
     }
 
