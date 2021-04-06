@@ -2,15 +2,15 @@ export const filterByDate = (story, min, max) => {
     // story.time is seconds, min/max dates are milliseconds
     if (min > 0 && max > 0) {
         if (min === max) { // search stories published during the given day
-            return story.time < (max+24*60*60*1000)/1000 && story.time > min/1000;
+            return story.time <= (max+24*60*60*1000)/1000 && story.time >= min/1000;
         }
-        return story.time < max/1000 && story.time > min/1000;
+        return story.time <= max/1000 && story.time >= min/1000;
     } else if (min > 0) {
         //return story.time > new Date(min).getTime();
-        return story.time > min/1000;
+        return story.time >= min/1000;
     } else if (max > 0) {
         //return story.time < new Date(max).getTime();
-        return story.time < max/1000;
+        return story.time <= max/1000;
     } else {
       return true;
     }
@@ -18,11 +18,11 @@ export const filterByDate = (story, min, max) => {
 
 export const filterByScore = (story, min, max) => {
     if (min > 0 && max > 0) { // both values are defined
-        return story.score < max && story.score > min;
+        return story.score <= max && story.score >= min;
     } else if (min > 0) {
-        return story.score > min;
+        return story.score >= min;
     } else if (max > 0) {
-        return story.score < max;
+        return story.score <= max;
     } else {
         return true;
     }
@@ -40,6 +40,8 @@ export const filterByName = (story, name) => {
 }
 
 // helper function
+// TODO localeCompare
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
 const sortArrayOfObjectsAlphabetically = (array)  => {
     return array.sort((a, b) => {
         const nameA = a.toUpperCase();
@@ -73,7 +75,7 @@ export const sortStories = (a,b, sortBy) => {
             return b.score - a.score; // biggest score first
         case 'date':
             return b.time - a.time; // newest first
-        default:
+        default: // todo localeCompare
             const nameA = a.by.toUpperCase(); // ignore case
             const nameB = b.by.toUpperCase();
             if (nameA < nameB) {

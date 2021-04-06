@@ -12,13 +12,16 @@ const bestStories = (state = null, action) => {
 const getCreator = (state = [], action) => {
     switch (action.type) {
         case 'FETCH_CREATOR_BY_ID_SUCCEEDED':
-                const list = [...state];
-                const index = list.findIndex(item => item.id === action.response.id);
-                if (index >= 0 ) { // remove old
-                    list.splice(index, 1);
-                }
-                list.push(action.response); // add freshly fetched
-                return list;
+            if (action.response === null) { // if fetch did not return creator object (wrong id or something)
+                return state;
+            }
+            const list = [...state];
+            const index = list.findIndex(item => item.id === action.response.id);
+            if (index >= 0 ) { // remove old
+                list.splice(index, 1);
+            }
+            list.push(action.response); // add freshly fetched
+            return list;
         default:
             return state;
     }

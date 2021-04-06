@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // TODO {props.history.goBack()} ????? something weird happened
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { fetchCreatorById } from '../redux/actions';
@@ -15,13 +15,17 @@ const CreatorContainer = (props) => {
         }
     });
 
-    if (!props.creators || !props.routerActiveCreator) {
-        return null;
-    }
-
     const creator = props.creators.find(creatorObj => creatorObj.id === props.routerActiveCreator);
     if (!creator) {
-       return null;
+        return <React.Fragment>
+            <div className='creatorInfo'>
+                <h1>{props.routerActiveCreator}</h1>
+                <p>
+                    No information for creator with id {props.routerActiveCreator} was found.
+                </p>
+            </div>
+            <Link to='../'>Get back to stories</Link>
+        </React.Fragment>;
     }
 
     const { created, id, karma, submitted } = creator;

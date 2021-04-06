@@ -1,4 +1,4 @@
-import { put, call } from 'redux-saga/effects';
+import { put, call, all } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actions from './actions';
 
@@ -6,21 +6,22 @@ export function *fetchStories() {
     try {
         const url = 'https://hacker-news.firebaseio.com/v0/beststories.json';
         const responseAll = yield call(axios.get, url);
-        // console.log('all', responseAll.data);
 
-        let only20 = [];
-        const all = responseAll.data;
-        for (let i = 0, n = 20; n > i; i++) {
-            if(all.length > i){
-                const currentId = all[i];
-                const url = 'https://hacker-news.firebaseio.com/v0/item/' + currentId + '.json';
-                const res = yield call(axios.get, url);
-                //console.log('currentId data', res.data);
-                only20.push(res.data);
-            }
+        const allData = responseAll.data;
+
+        // gather all api calls first together
+        const calls = allData.slice(0,20).map((currentId) => {
+            const url = 'https://hacker-news.firebaseio.com/v0/item/' + currentId + '.json';
+            return call(axios.get, url);
+        })
+
+        let only20 = []; // the final list of story data that will end up to redux store
+        const only20Responses = yield all(calls); // make all calls asynchronously. Read more: https://redux-saga.js.org/docs/advanced/RunningTasksInParallel/
+        for (const item of only20Responses) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
+            only20.push(item.data);
         }
-        // console.log('only20 fetched in detail', only20);
 
+        // console.log('only20 fetched in detail', only20);
         yield put(actions.fetchStoriesSucceeded(only20));
     } catch (e) {
         // console.log('error when fetching stories!')
